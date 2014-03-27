@@ -2,11 +2,6 @@
   connection: local
   gather_facts: no
   tasks: 
-#  - command: var_slup.py {{ inventory_dir }} 
-#    register: output
 
    - var_slurp: inv_path={{ inventory_dir }}
 
-#  - debug: msg="{{ output.stdout }}"    
-
-#  - set_fact: foo={{ output.stdout }}
