@@ -1,0 +1,34 @@
+#! /usr/bin/env python
+
+import yaml
+import sys
+import glob
+import os.path
+
+def main():
+    module = AnsibleModule(
+        argument_spec = dict(
+            inv_path = dict(required=True)
+        )
+    )
+    inv_path = module.params.get('inv_path')
+
+    host_vars_path = inv_path + '/host_vars'
+    host_list = []
+
+    for host_var_file in glob.glob( host_vars_path + '/*'):
+      hostname = os.path.basename(host_var_file)
+      f = open(host_var_file, 'r')
+      host_var_data = yaml.load(f)
+      host_list.append(host_var_data)
+
+
+    result= { 'ansible_facts' : { 'slurped_vars': host_list } }
+
+    module.exit_json(**result)
+
+# import module snippets
+from ansible.module_utils.basic import *
+
+main()
+
