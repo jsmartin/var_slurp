@@ -20,7 +20,7 @@ def main():
       hostname = os.path.basename(host_var_file)
       f = open(host_var_file, 'r')
       host_var_data = yaml.load(f)
-      host_list.append(host_var_data)
+      host_list.append({ hostname: host_var_data })
 
 
     result= { 'ansible_facts' : { 'slurped_vars': host_list } }
