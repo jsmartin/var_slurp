@@ -4,4 +4,4 @@
   tasks: 
 
    - var_slurp: inv_path={{ inventory_dir }}
-
+   - template: src=hosts.j2 dest=/tmp/hosts

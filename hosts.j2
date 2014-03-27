@@ -1,0 +1,9 @@
+# {{ansible_managed}}
+127.0.0.1   localhost localhost.localdomain
+ 
+# Individual private IP machine routes
+{% for host in hostvars['127.0.0.1']['slurped_vars'] %}
+{% for k, v in host.iteritems() %}
+{{ v.ip }}  {{ v.name }}
+{% endfor %}
+{% endfor %}
